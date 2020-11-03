@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+
+  project_name:
+    container_name: proyektinadi
+    build: .
+    restart: "always"
+    env_file: .env
+    environment:
+      - VIRTUAL_HOST=example.com
+      - VIRTUAL_PORT=8060
+      - TIMEOUT=300
+      - HTTP_PORT=8060
+      - STATS_PORT=8061
+    volumes:
+      - .:/code
+    ports:
+      - "8060:8060"
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
